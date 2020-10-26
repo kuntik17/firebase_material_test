@@ -103,16 +103,13 @@ export const store = new Vuex.Store({
         .catch((error) => {
           commit("setLoading", false);
           if (error.code === "auth/wrong-password") {
-            commit("setError", "Hatalı şifre");
+            commit("setError", "Wrong password");
           } else if (error.code === "auth/user-not-found") {
-            commit("setError", "E-posta adresi bulunamadı");
+            commit("setError", "E-mail not found");
           } else if (error.code === "auth/too-many-requests") {
-            commit(
-              "setError",
-              "Peş peşe hatalı deneme, daha sonra tekrar deneyin"
-            );
+            commit("setError", "Too many requests");
           } else if (error.code === "auth/argument-error") {
-            commit("setError", "Geçersiz e-posta adresi");
+            commit("setError", "Invalid type e-mail");
           }
         });
     },
@@ -261,12 +258,12 @@ export const store = new Vuex.Store({
             return doc.data();
           } else {
             commit("setLoading", false);
-            commit("setError", "Davetiye bulunamadı");
+            commit("setError", "House not found");
           }
         });
       } catch (error) {
         commit("setLoading", false);
-        commit("setError", "Davetiye bulunamadı");
+        commit("setError", "House not found");
       }
     },
     //EOF find house by id
@@ -344,9 +341,6 @@ export const store = new Vuex.Store({
     },
     loadedHouse(state) {
       return state.loadedHouse;
-    },
-    goldPrices(state) {
-      return state.prices;
     },
     myHouseId(state) {
       return state.myHouseId;

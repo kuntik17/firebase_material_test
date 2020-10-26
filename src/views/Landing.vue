@@ -94,7 +94,7 @@
                   <md-card class="md-card-plain">
                     <div class="md-layout-item md-size-50 mx-auto">
                       <img
-                        src="https://firebasestorage.googleapis.com/v0/b/takikolay-451c1.appspot.com/o/houses%2FeqQkrUpu2vfWsdPwY2ea%2F0.jpeg?alt=media&token=753171a9-6264-4e7f-8c70-3b5cb102f6c0"
+                        src="https://firebasestorage.googleapis.com/v0/b/openhouse-7ef82.appspot.com/o/houses%2FlRTU8SjOZRd0xpZJsB5Q%2F0.jpeg?alt=media&token=4c796b22-d283-4b6b-b4e5-a6ab260b8497"
                         alt="Thumbnail Image"
                         class="img-raised rounded-circle img-fluid"
                       />
@@ -111,7 +111,7 @@
                     </md-card-content>
                     <md-button
                       class="md-warning md-just-icon md-round"
-                      to="/house/eqQkrUpu2vfWsdPwY2ea"
+                      to="/house/lRTU8SjOZRd0xpZJsB5Q"
                       ><md-icon>house</md-icon></md-button
                     >
                   </md-card>
