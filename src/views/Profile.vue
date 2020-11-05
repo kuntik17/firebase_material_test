@@ -107,16 +107,31 @@
 
               <template slot="tab-pane-2">
                 <div class="md-layout">
+                  <md-field
+                    class="md-form-group has-warning mb-lg"
+                    slot="inputs"
+                  >
+                    <label>Write your comment...</label>
+                    <md-input v-model="comment" type="text" required></md-input>
+                    <md-button
+                      class="md-simple md-warning"
+                      @click="sendComment"
+                    >
+                      Send comment
+                    </md-button>
+                  </md-field>
+
                   <div
                     class="md-layout-item md-size-66 mx-auto md-small-size-100"
                   >
-                    <div class="md-scrollbar">
+                    <div
+                      class="md-scrollbar"
+                      v-for="comment in loadHouse.comments"
+                      :key="comment"
+                    >
                       <p>
-                        Best house ever!
+                        {{ comment }}
                         <md-divider></md-divider>
-                        I like it
-                        <md-divider></md-divider>
-                        Should be mine
                       </p>
                     </div>
                   </div>
@@ -145,7 +160,7 @@ export default {
   data() {
     return {
       step: 1,
-
+      comment: null,
       QRlink: null,
       HouseId: null,
       whatsappShare: null,
@@ -173,6 +188,20 @@ export default {
     this.facebookShare =
       "https://www.facebook.com/sharer/sharer.php?u=" + this.QRlink;
     this.twitterShare = "https://twitter.com/share?url=" + this.QRlink;
+  },
+  methods: {
+    sendComment() {
+      if (this.comment) {
+        let payload = {
+          comment: this.comment,
+          id: this.houseId,
+        };
+        this.$store.dispatch("sendComment", payload).then(() => {
+          this.$store.getters.loadedHouse;
+        });
+        this.comment = "";
+      }
+    },
   },
 
   computed: {

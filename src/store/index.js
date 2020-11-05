@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import * as firebase from "firebase";
-import axios from "axios";
 import router from "../router";
 
 Vue.use(Vuex);
@@ -20,6 +19,7 @@ export const store = new Vuex.Store({
       buildDate: "",
       location: "",
       imageUrl: [""],
+      comments: [""],
     }, // Before rendering an house page, get data from firebase
   },
   //##############//
@@ -43,7 +43,6 @@ export const store = new Vuex.Store({
     createHouse(state, payload) {
       state.setLoadedHouse = payload;
     },
-
     setMyHouse(state, payload) {
       state.myHouseId = payload;
     },
@@ -243,6 +242,7 @@ export const store = new Vuex.Store({
           buildDate: null,
           location: null,
           imageUrl: [],
+          comments: [],
         };
 
         const ref = await firebase
@@ -296,11 +296,10 @@ export const store = new Vuex.Store({
     },
     //EOF Find house by owner
     //##############//
-    //Send gift to house
-    async sendGold({ commit }, payload) {
+    //Send comment to house
+    async sendComment({ commit }, payload) {
       commit("setLoading", true);
       commit("clearError");
-
       try {
         const ref = await firebase
           .firestore()
@@ -310,14 +309,12 @@ export const store = new Vuex.Store({
         // Atomically add a new region to the "regions" array field.
         ref
           .update({
-            gifts: firebase.firestore.FieldValue.arrayUnion({
-              sender: payload.senderFullName,
-              goldType: payload.goldType,
-              note: payload.note,
-            }),
+            comments: firebase.firestore.FieldValue.arrayUnion(payload.comment),
           })
           .then(() => {
-            commit("setLoading", true);
+            commit("setLoading", false);
+            router.go("/house/" + payload.id);
+
             return true;
           });
       } catch (error) {
