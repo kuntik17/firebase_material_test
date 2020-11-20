@@ -47,7 +47,7 @@
               class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
             >
               <login-card header-color="orange">
-                <h4 slot="title" class="card-title">About house</h4>
+                <h4 slot="title" class="card-title">About the house</h4>
 
                 <p slot="description" class="description"></p>
                 <md-field class="md-form-group has-warning" slot="inputs">
